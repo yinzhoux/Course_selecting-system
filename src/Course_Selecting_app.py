@@ -1,6 +1,12 @@
 import json
-
 import streamlit as st
+
+import path
+import sys
+
+
+dir = path.Path(__file__).abspath()
+sys.path.append(str(dir.parent.parent))
 
 st.header("Course selection System")
 

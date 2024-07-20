@@ -1,6 +1,11 @@
 import json
 import streamlit as st
+import path
+import sys
 
+
+dir = path.Path(__file__).abspath()
+sys.path.append(str(dir.parent.parent))
 
 with open("data/online_student.json", "r") as f:
     online_student = json.load(f)["name"]

@@ -1,6 +1,11 @@
 import streamlit as st
 import json
+import path
+import sys
 
+
+dir = path.Path(__file__).abspath()
+sys.path.append(str(dir.parent.parent))
 st.title("Course List")
 
 with open("data/courses.jsonl", "r") as f:
