@@ -27,7 +27,7 @@ def login():
         st.session_state.password = st.text_input("Please enter password:")
 
     if st.button("Log in"):
-        if role == "Administrator" and st.session_state.password == "11111111":
+        if (role == "Administrator" and st.session_state.password == "11111111") or role == "Student":
             st.session_state.role = role
             st.rerun()
         else:
