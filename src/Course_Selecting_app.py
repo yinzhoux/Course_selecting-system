@@ -1,6 +1,12 @@
 import json
-
 import streamlit as st
+
+import path
+import sys
+
+
+dir = path.Path(__file__).abspath()
+sys.path.append(str(dir.parent.parent))
 
 st.header("Course selection System")
 
@@ -27,7 +33,7 @@ def login():
         st.session_state.password = st.text_input("Please enter password:")
 
     if st.button("Log in"):
-        if role == "Administrator" and st.session_state.password == "11111111":
+        if (role == "Administrator" and st.session_state.password == "11111111") or role == "Student":
             st.session_state.role = role
             st.rerun()
         else:

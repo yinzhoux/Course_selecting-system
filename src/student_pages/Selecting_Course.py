@@ -1,6 +1,11 @@
 import json
 import streamlit as st
+import path
+import sys
 
+
+dir = path.Path(__file__).abspath()
+sys.path.append(str(dir.parent.parent))
 
 def time_conflict_judge(selected_course_time, to_select_course_time):
     t1 = selected_course_time
