@@ -15,7 +15,7 @@ if "role" not in st.session_state:
 
 ROLES = [None, "Student", "Administrator"]
 
-with open("data/student.jsonl", "r") as f:
+with open("https://github.com/yinzhoux/Course_selecting-system/blob/GUI-version/src/data/student.jsonl", "r") as f:
     students = [json.loads(line) for line in f]
     student_list = [student["name"] for student in students]
 
