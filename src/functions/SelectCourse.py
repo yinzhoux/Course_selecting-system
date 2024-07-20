@@ -20,8 +20,6 @@ def time_conflict_judge(selected_course_time, to_select_course_time):
     else:
         return True
 
-    pass
-
 
 def select_course(student, courses):
     list_all_courses(courses)
