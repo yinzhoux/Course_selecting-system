@@ -1,17 +1,17 @@
 import json
 import streamlit as st
-import path
-import sys
+import os
 
+base = os.path.dirname(os.path.abspath(__file__))
+student_file = os.path.join(base, "../data/student.jsonl")
+online_student_file = os.path.join(base, "../data/online_student.json")
+course_data_file = os.path.join(base, "../data/courses.jsonl")
 
-dir = path.Path(__file__).abspath()
-sys.path.append(str(dir.parent.parent))
-
-with open("data/online_student.json", "r") as f:
+with open(online_student_file, "r") as f:
     online_student = json.load(f)["name"]
 
 st.subheader(f"Selected courses of {online_student}")
-with open("data/student.jsonl", "r") as f:
+with open(student_file, "r") as f:
     for line in f:
         student_tmp = json.loads(line)
         if student_tmp["name"] == online_student:
@@ -19,7 +19,7 @@ with open("data/student.jsonl", "r") as f:
             break
 
 selected_courses_info = []
-with open("data/courses.jsonl", "r") as f:
+with open(course_data_file, "r") as f:
     for line in f:
         courses_tmp = json.loads(line)
         for id_tmp in st.session_state.selected:

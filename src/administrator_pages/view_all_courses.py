@@ -1,20 +1,17 @@
 import streamlit as st
 import json
-import path
-import sys
+import os
 
+base = os.path.dirname(os.path.abspath(__file__))
+courses_data_path = os.path.join(base, "../data/courses.jsonl")
 
-dir = path.Path(__file__).abspath()
-sys.path.append(str(dir.parent.parent))
-st.title("Course List")
-
-with open("data/courses.jsonl", "r") as f:
+with open(courses_data_path, "r") as f:
     data = [json.loads(line) for line in f]
 
 edited_info = st.data_editor(data)
 
 if st.button("Save Change"):
-    with open("data/courses.jsonl", "w") as f:
+    with open(courses_data_path, "w") as f:
         for line in edited_info:
             f.write(json.dumps(line) + "\n")
     st.success("Saved successfully!")
