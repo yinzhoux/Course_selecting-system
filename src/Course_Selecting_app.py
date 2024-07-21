@@ -2,11 +2,10 @@ import json
 import streamlit as st
 
 import path
-import sys
+import os
 
-
-dir = path.Path(__file__).abspath()
-sys.path.append(str(dir.parent.parent))
+base = os.path.dirname(os.path.abspath(__file__))
+file = os.path.join(base, "data/student.jsonl")
 
 st.header("Course selection System")
 
@@ -15,7 +14,7 @@ if "role" not in st.session_state:
 
 ROLES = [None, "Student", "Administrator"]
 
-with open("data/student.jsonl", "r") as f:
+with open(file, "r") as f:
     students = [json.loads(line) for line in f]
     student_list = [student["name"] for student in students]
 
