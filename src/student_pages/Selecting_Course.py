@@ -1,11 +1,12 @@
 import json
 import streamlit as st
-import path
-import sys
+import os
 
+base = os.path.dirname(os.path.abspath(__file__))
+student_file = os.path.join(base, "../data/student.jsonl")
+online_student_file = os.path.join(base, "../data/online_student.json")
+course_data_file = os.path.join(base, "../data/courses.jsonl")
 
-dir = path.Path(__file__).abspath()
-sys.path.append(str(dir.parent.parent))
 
 def time_conflict_judge(selected_course_time, to_select_course_time):
     t1 = selected_course_time
@@ -20,11 +21,11 @@ def time_conflict_judge(selected_course_time, to_select_course_time):
         return True
 
 
-with open("data/online_student.json", "r") as f:
+with open(online_student_file, "r") as f:
     online_student = json.load(f)["name"]
 
-st.subheader(f"Selected courses of {online_student}")
-with open("data/student.jsonl", "r") as f:
+st.subheader(f"Select courses for {online_student}")
+with open(student_file, "r") as f:
     for line in f:
         student_tmp = json.loads(line)
         if student_tmp["name"] == online_student:
@@ -33,7 +34,7 @@ with open("data/student.jsonl", "r") as f:
 
 selected_courses_info = []
 all_courses = []
-with open("data/courses.jsonl", "r") as f:
+with open(course_data_file, "r") as f:
     for line in f:
         courses_tmp = json.loads(line)
         all_courses.append(courses_tmp)
@@ -60,12 +61,12 @@ if st.button("Select course"):
 
         if not time_conflict_flag:
             st.success(f"Course selected successfully: {to_select}")
-            with open("data/student.jsonl", "r") as f:
+            with open(student_file, "r") as f:
                 all_student = [json.loads(line) for line in f]
             for student in all_student:
                 if student["name"] == online_student:
                     student["selected"].append(to_select)
                     break
-            with open("data/student.jsonl", "w") as f:
+            with open(student_file, "w") as f:
                 for student in all_student:
                     f.write(json.dumps(student) + "\n")

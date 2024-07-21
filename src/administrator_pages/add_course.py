@@ -1,13 +1,9 @@
 import streamlit as st
 import json
-import path
-import sys
+import os
 
-
-dir = path.Path(__file__).abspath()
-sys.path.append(str(dir.parent.parent))
-st.subheader('Add Course')
-
+base = os.path.dirname(os.path.abspath(__file__))
+courses_data_path = os.path.join(base, "../data/courses.jsonl")
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def load_data(filepath):
@@ -23,7 +19,6 @@ def save_data(filepath, data):
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # load courses data
-courses_data_path = "data/courses.jsonl"
 courses = load_data(courses_data_path)
 
 st.write("Please enter the course info here.")
